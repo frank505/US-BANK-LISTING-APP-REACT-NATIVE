@@ -1,4 +1,5 @@
 import fetchIntercept from 'fetch-intercept';
+import { UNKNOWN_ERROR } from './store/actiontypes/UnKnownError';
 
 
 
@@ -22,15 +23,21 @@ export const HttpInterceptor = (store) =>fetchIntercept.register({
         if(response.status==401)
         {
             console.log("ready to redirect");       
+        }else if(response.status==500)
+        {
+            console.log('500')
+        }else if(response.status==404)
+        {
+            console.log('404')
         }
         return response;
     },
 
     responseError: function (error) {
-        console.log('error here oooo take note');
+      
         if(error.status==undefined || error.status==401)
         {
-            console.log("ready to redirect to next page");
+              store.dispatch({type:UNKNOWN_ERROR})
         }
         // Handle an fetch error
         return Promise.reject(error);

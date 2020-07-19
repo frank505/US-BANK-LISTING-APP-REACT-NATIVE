@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import { Platform } from 'react-native';
 
 
@@ -7,16 +6,15 @@ class HttpService
        
     setUrl = () =>
     {
-       let url = "https://usbanklisting.com/wp-json/wp/v2/";
+       let url = "https://usbanklisting.com/wp-json/wp/v2";
         return url;
     }
 
     postData = async(item ,addedUrl,postType,tokenId="") =>
     {
-        const token = await AsyncStorage.getItem(tokenId);
 
-        const requestOptions = this.postRequestOptions(token,item,postType);
-
+        const requestOptions = this.postRequestOptions(null,item,postType);
+         
         return fetch(this.setUrl()+"/"+addedUrl, requestOptions).then(
             response=>response.json());
     }
@@ -24,8 +22,9 @@ class HttpService
 
     getData = async(addedUrl,tokenId="") =>
     {
-        const token = await AsyncStorage.getItem(tokenId);
-        const requestOptions = this.getRequestOptions(token);
+        console.log(this.setUrl()+"/"+addedUrl);
+   
+        const requestOptions = this.getRequestOptions(null);
 
         return fetch(this.setUrl()+"/"+addedUrl, requestOptions).then(
             response=>response.json());
@@ -34,8 +33,7 @@ class HttpService
 
     deleteData = async(addedUrl,tokenId="") =>
     {
-        const token = await AsyncStorage.getItem(tokenId);
-        const requestOptions = this.deleteRequestOptions(token);
+        const requestOptions = this.deleteRequestOptions(null);
 
         return fetch(this.setUrl()+"/"+addedUrl, requestOptions).then(
             response=>response.json());
