@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Header as BankListsHeader, Left, Body, Right, Button, Icon, Title } from 'native-base';
+import { Container, Header as FullPostHeader, Left, Body, Right, Button, Icon, Title } from 'native-base';
 // import {styles} from '../styles'
 import {useNavigation,useRoute} from '@react-navigation/native';
 import { Platform } from 'react-native';
@@ -10,7 +10,7 @@ export default function Header() {
  
     const routeParams = useRoute();
  
-    const { name } = routeParams.params;
+    const { title } = routeParams.params;
 
     const { id } = routeParams.params;
 
@@ -20,7 +20,7 @@ export default function Header() {
      }
     
     return (
-        <BankListsHeader>
+        <FullPostHeader>
           
           <Left>
             {
@@ -33,12 +33,12 @@ export default function Header() {
          
           </Left>
           <Body>
-          <Title>{name}</Title>
+          <Title>{title}</Title>
           </Body>
           <Right>
             
           </Right>
           
-        </BankListsHeader>
+        </FullPostHeader>
     )
 }

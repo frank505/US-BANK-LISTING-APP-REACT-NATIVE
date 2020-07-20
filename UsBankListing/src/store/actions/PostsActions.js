@@ -1,0 +1,80 @@
+import { POSTS_LOADING, POSTS_SUCCESS,POST_LOADING,POST_SUCCESS, CLEAR_POSTS,CLEAR_POST } from "../actiontypes/Posts";
+import { loadPosts,loadPost} from "../../services/PostsService";
+
+export const GetPostsAction = (page,categories) =>
+{
+
+   return (dispatch)=>{
+
+       dispatch({type:POSTS_LOADING});
+       
+       loadPosts(page,categories).then((res)=>{
+              
+        console.log(res);
+           if(res instanceof Array)
+           {
+                
+                 dispatch({type:POSTS_SUCCESS,res});
+           }else
+           {
+            res = "";
+           }
+
+                   
+           },
+           error=>{
+               console.log(error);
+           }
+       )
+   } 
+
+} 
+
+
+export const GetPostAction = (id) =>
+{
+
+   return (dispatch)=>{
+
+       dispatch({type:POST_LOADING});
+       
+       loadPost(id).then((res)=>{
+              
+        console.log(res);
+           if(res instanceof Array)
+           {
+                
+                 dispatch({type:POST_SUCCESS,res});
+           }else
+           {
+            res = "";
+           }
+
+                   
+           },
+           error=>{
+               console.log(error);
+           }
+       )
+   } 
+
+} 
+
+
+export const clearPostsState = () =>
+{
+    return (dispatch)=>
+    {
+        dispatch({type:CLEAR_POSTS});
+    }
+}
+
+export const clearPostState = () =>
+{
+    return (dispatch)=>
+    {
+        dispatch({type:CLEAR_POST});
+    }
+}
+
+

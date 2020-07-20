@@ -7,15 +7,19 @@ import {
   import { Container, Header, Content, List, ListItem, Text,
      Left, Right, Icon,View } from 'native-base';
   import { useSelector,useDispatch } from 'react-redux';
-import { GetCategories } from '../../../store/actions/CategoryAction';
 import ContentLoader, { Rect, Circle, BulletList,List as ListLoader } from 'react-content-loader/native'
-import { useNavigation,useFocusEffect } from '@react-navigation/native';
-import { clearCategoryState } from '../../../store/actions/CategoryAction';
+import { useNavigation } from '@react-navigation/native';
+import { GetPostsAction, clearPostsState } from '../../../store/actions/PostsActions';
+import {useRoute,useFocusEffect} from '@react-navigation/native';
 
 
-export default function StateList() {
+export default function BankListsTitle() {
 
-    const categoriesResponse = useSelector(state=>state.category.categorieState);
+    const routeParams = useRoute();
+
+    const { id } = routeParams.params;
+
+    const postResponse = useSelector(state=>state.posts.postsState);
 
     const dispatch = useDispatch();
 
@@ -31,7 +35,7 @@ export default function StateList() {
   
     useEffect(() => {
       
-       dispatch(GetCategories(initPager));
+       dispatch(GetPostsAction(initPager,id));
 
         return () => {
          
@@ -39,26 +43,26 @@ export default function StateList() {
     }, []);
 
 
-       /**
+           /**
   * called once we loose focus of this screen react navigation 5 new hooks
   */ 
  useFocusEffect(
   React.useCallback(() => {
   
     return () => {
-      dispatch(clearCategoryState());
+      dispatch(clearPostsState());
     }
   }, [])
  
   );
-   
 
-   const loadRelatedBanks = (id,name)=>
+   const loadBankFullPosts = (id,title,post)=>
     {
-      console.log("clicked me");
-      navigation.navigate("BankLists",{
-        name:name,
-        id:id
+    //   console.log("clicked me");
+      navigation.navigate("FullPost",{
+        title:title,
+        id:id,
+       post:post
       });
     }
 
@@ -67,9 +71,9 @@ export default function StateList() {
 
         return(
             <List >
-            <ListItem onPress={e=>loadRelatedBanks(item.id,item.name)}>
+            <ListItem onPress={e=>loadBankFullPosts(item.slug,item.title.rendered,item.content.rendered)}>
               <Left>
-                <Text style={{fontWeight:"bold"}}>{item.name} </Text>
+                <Text style={{fontWeight:"bold"}}>{item.title.rendered} </Text>
               </Left>
               <Right>
                 <Icon name="arrow-forward" />
@@ -113,6 +117,7 @@ export default function StateList() {
 
    const renderFooter = () =>
    {
+     console.log(refreshBool);
         if(refreshBool==false){
             return null;
         }
@@ -121,21 +126,21 @@ export default function StateList() {
     
    useEffect(() => {
           
-      console.log(categoriesResponse);
+      console.log(postResponse);
 
-    if(categoriesResponse!="" && categoriesResponse!=="loading")
+    if(postResponse!="" && postResponse!=="loading")
     {
-      if(categoriesResponse !=null)
+      if(postResponse !=null)
       {
-        if(categoriesResponse.length >= 20)
-        {
-          let nextPage = parseInt(initPager) + 1;
-          setinitPager(nextPage);
+        if(postResponse.length >= 20)
+        { 
+       let nextPage = parseInt(initPager) + 1;
+        setinitPager(nextPage);
         }
-      
-        setResponseData(responseData => [...responseData, ...categoriesResponse]);
+        
+        setResponseData(responseData => [...responseData, ...postResponse]);
         setrefreshBool(false);
-        setTotalItems(categoriesResponse.length);
+        setTotalItems(postResponse.length);
       }  
       
     }else
@@ -145,17 +150,17 @@ export default function StateList() {
     return () => {
       
     }
-  }, [categoriesResponse])
+  }, [postResponse])
     
    const fetchMore = () =>
      {
-             if(initPager==1 && categoriesResponse.length < 20  )
+             if(initPager==1 && postResponse.length < 20 )
              {
 
              } else
              {
                setrefreshBool(true);
-              dispatch(GetCategories(initPager));
+              dispatch(GetPostsAction(initPager,id));
              }
      }
 
@@ -163,7 +168,8 @@ export default function StateList() {
      return (
         <>
         {
-         ( (responseData=="" || responseData=="loading" && responseData.length==0) && initPager==1)?
+         ( (responseData=="" || responseData=="loading" && responseData.length==0) 
+         && initPager==1)?
           loadAnimation()
         :
         responseData==null ?

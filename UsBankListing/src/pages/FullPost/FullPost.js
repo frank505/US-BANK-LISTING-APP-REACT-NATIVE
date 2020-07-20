@@ -1,19 +1,19 @@
 import React,{useEffect} from 'react'
 import { Container } from 'native-base'
 import Header from './Components/Header'
-import BankListsTitle from './Components/BankListsTitle'
+import PostContent from './Components/PostContent'
 
 
 
 
-export default function BankLists() 
+export default function FullPost() 
  {
 
 
     return (
         <Container>
          <Header/>
-         <BankListsTitle />
+         <PostContent />
         </Container>
        
     )

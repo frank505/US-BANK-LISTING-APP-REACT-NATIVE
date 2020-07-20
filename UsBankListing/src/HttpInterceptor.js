@@ -20,25 +20,21 @@ export const HttpInterceptor = (store) =>fetchIntercept.register({
     response: function (response) {
         // Modify the reponse object
         console.log(response.status);
-        if(response.status==401)
-        {
-            console.log("ready to redirect");       
-        }else if(response.status==500)
-        {
-            console.log('500')
-        }else if(response.status==404)
-        {
-            console.log('404')
-        }
+        // if(response.status==500)
+        // {
+        //     store.dispatch({type:UNKNOWN_ERROR});
+
+        // }else if(response.status==404)
+        // {
+        //     store.dispatch({type:UNKNOWN_ERROR});
+        // }
         return response;
     },
 
     responseError: function (error) {
       
-        if(error.status==undefined || error.status==401)
-        {
+       
               store.dispatch({type:UNKNOWN_ERROR})
-        }
         // Handle an fetch error
         return Promise.reject(error);
     } 

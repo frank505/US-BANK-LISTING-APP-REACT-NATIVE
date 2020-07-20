@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer,DefaultTheme,DarkTheme } from '@react-navigation/native';
-import { Appearance } from 'react-native';
+import { Appearance, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import States from './pages/States'
 import { DrawerContent } from './DrawerContent';
@@ -10,6 +10,8 @@ import About from './pages/About';
 import Privacy from './pages/Privacy';
 import { createStackNavigator } from '@react-navigation/stack';
 import BankLists from './pages/BankLists';
+import {useSelector} from 'react-redux';
+import FullPost from './pages/FullPost';
 
 
 
@@ -25,7 +27,7 @@ const Stack = createStackNavigator();
   >
       <Stack.Screen name="State" component={States} />
      <Stack.Screen name="BankLists" component={BankLists} />
-   
+     <Stack.Screen name="FullPost" component={FullPost} />
    
    
   </Stack.Navigator>
@@ -40,8 +42,26 @@ export default function Main(props) {
 
   const colorScheme = Appearance.getColorScheme();
 
-  
+  const unknownErr = useSelector(state => state.unknownErr.unknownErr);
    
+   useEffect(() => {
+     if(unknownErr==true)
+     {
+      Alert.alert(
+        "Oops! Unknown Error",
+        "Please check your network connection",
+        [
+           {
+               text:"OK"
+           },
+        ]
+    )
+     }
+     return () => {
+
+     }
+   }, [unknownErr])
+
     return (
       
       <NavigationContainer
