@@ -20,7 +20,7 @@ export default function SearchBar(props) {
     }
 
     return (
-        <Header searchBar rounded>
+        <Header searchBar rounded style={{backgroundColor:"#d9534f"}}>
           <Item>
             <Icon name="ios-arrow-back" onPress={goBack} />
             <Input placeholder="Search"   onChangeText={(text)=>SearchData(text)} />

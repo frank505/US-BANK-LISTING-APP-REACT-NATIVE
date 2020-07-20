@@ -4,7 +4,7 @@ import {
   } from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import HTML from 'react-native-render-html';
-import { Title, Card } from 'native-base';
+import { Title, Card,Text } from 'native-base';
 import HTMLView from 'react-native-htmlview';
 
 
@@ -35,8 +35,8 @@ export default function PostContent() {
         <ScrollView style={{ flex: 1,maxWidth:'94%',marginLeft:"3%",marginRight:"3%" }}>
 
         <Card style={{paddingLeft:10,paddingRight:10}}>
-        <Title style={{marginTop:10,textAlign:'center',color:'red',
-        fontWeight:'bold',fontSize:21,borderWidth:4,borderColor:"red"}}>{title}</Title>
+        <Text style={{marginTop:10,textAlign:'center',color:'red',
+        fontWeight:'bold',fontSize:21,borderWidth:4,borderColor:"red"}}>{title}</Text>
         <HTML 
         imagesMaxWidth={Dimensions.get('window').width}
         htmlStyles={styles}

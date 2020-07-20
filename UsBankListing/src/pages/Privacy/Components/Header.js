@@ -16,7 +16,7 @@ export default function Header() {
      }
     
     return (
-        <PrivacyHeader >
+        <PrivacyHeader style={{backgroundColor:"#d9534f"}}>
           
           <Left>
             {

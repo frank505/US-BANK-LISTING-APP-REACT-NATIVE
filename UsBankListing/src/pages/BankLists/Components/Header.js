@@ -27,12 +27,12 @@ export default function Header() {
      }   
     
     return (
-        <BankListsHeader>
+        <BankListsHeader style={{backgroundColor:"#d9534f"}}>
           
           <Left>
             {
               Platform.OS=='android'?
-              <Icon name="arrow-back" onPress={goBackToPrevPage} style={{marginLeft:10,color:'whiste'}}/>
+              <Icon name="arrow-back" onPress={goBackToPrevPage} style={{marginLeft:10,color:'white'}}/>
               :
               <Icon name="arrow-back" onPress={goBackToPrevPage}  style={{marginLeft:10}}/>
             }
@@ -43,7 +43,14 @@ export default function Header() {
           <Title>{name}</Title>
           </Body>
           <Right>
-          <Icon name="ios-search" onPress={moveToSearchPostPage} style={{marginRight:10,fontSize:20}} />
+            {
+              Platform.OS=="android"?
+              <Icon name="ios-search" onPress={moveToSearchPostPage} style={{
+                marginRight:10,fontSize:20,color:"white"}} />
+              :
+              <Icon name="ios-search" onPress={moveToSearchPostPage} style={{marginRight:10,fontSize:20}} />
+            }
+         
           </Right>
           
         </BankListsHeader>

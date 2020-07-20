@@ -16,7 +16,7 @@ export default function Header() {
      }
     
     return (
-        <AboutHeader >
+        <AboutHeader style={{backgroundColor:"#d9534f"}}>
           
           <Left>
             {

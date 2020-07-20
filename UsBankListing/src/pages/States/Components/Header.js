@@ -22,7 +22,7 @@ export default function Header() {
 
 
     return (
-        <StateHeader>
+        <StateHeader style={{backgroundColor:"#d9534f"}}>
 
             <Left>
             {
@@ -38,7 +38,13 @@ export default function Header() {
             <Title>Us States</Title>
           </Body>
           <Right>
+            {Platform.OS=='android'?
+             <Icon name="ios-search" onPress={moveToSearchPage} 
+             style={{marginRight:10,fontSize:20,color:'white'}} />
+             :
              <Icon name="ios-search" onPress={moveToSearchPage} style={{marginRight:10,fontSize:20}} />
+            }
+            
 
           </Right>    
           

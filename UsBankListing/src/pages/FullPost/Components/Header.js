@@ -20,12 +20,12 @@ export default function Header() {
      }
     
     return (
-        <FullPostHeader>
+        <FullPostHeader style={{backgroundColor:"#d9534f"}}>
           
           <Left>
             {
               Platform.OS=='android'?
-              <Icon name="arrow-back" onPress={goBackToPrevPage} style={{marginLeft:10,color:'whiste'}}/>
+              <Icon name="arrow-back" onPress={goBackToPrevPage} style={{marginLeft:10,color:'white'}}/>
               :
               <Icon name="arrow-back" onPress={goBackToPrevPage}  style={{marginLeft:10}}/>
             }
