@@ -7,15 +7,18 @@ import {
     ActivityIndicator, 
     Alert,
   } from 'react-native';
- import {useNavigation,useFocusEffect} from '@react-navigation/native';
+ import {useNavigation,useFocusEffect,useRoute} from '@react-navigation/native';
 import { useDispatch,useSelector } from 'react-redux';
 import ContentLoader, { Rect, Circle, BulletList,List as ListLoader } from 'react-content-loader/native'
-import { clearSearchCategoryState, GetSearchCategories } from '../../../store/actions/CategoryAction';
+import { GetSearchPostsAction,clearSearchPostState } from '../../../store/actions/PostsActions';
 
  
 export default function SearchBankList(props) {
 
- 
+  const routeParams = useRoute();
+
+  const { category } = routeParams.params;
+
     const navigation = useNavigation();
 
     const [initPager, setinitPager] = useState("1");
@@ -23,12 +26,14 @@ export default function SearchBankList(props) {
     const dispatch = useDispatch();
 
     const [refreshBool, setrefreshBool] = useState(false);
-    
-    const searchResponse = useSelector(state=>state.category.categoriesSearchState);
+        
+    const searchResponse = useSelector(state=>state.posts.postSearch);
 
     const [responseData, setResponseData] = useState([]);
 
     const [totalItems, setTotalItems] = useState("");
+
+
 
  
     useEffect(() => 
@@ -41,7 +46,7 @@ export default function SearchBankList(props) {
      if(props.props !="")
      {
       setinitPager("1"); 
-      dispatch(GetSearchCategories(initPager,props.props));
+      dispatch(GetSearchPostsAction(category,initPager,props.props));
 
      }
       
@@ -59,7 +64,7 @@ export default function SearchBankList(props) {
   React.useCallback(() => {
   
     return () => {
-      dispatch(clearSearchCategoryState());
+      dispatch(clearSearchPostState());
     }
   }, [])
  
@@ -110,20 +115,13 @@ export default function SearchBankList(props) {
 }, [searchResponse])
 
 
-    const loadRelatedBanks = (id,name)=>
-    {
-      console.log("clicked me");
-      navigation.navigate("BankLists",{
-        name:name,
-        id:id
-      });
-    }
+   
 
     const fetchMore = () =>
      {
        if(props.props=="")
        {
-         dispatch(clearSearchCategoryState());
+         dispatch(clearSearchPostState());
          setResponseData([]);
          return;
        }
@@ -134,7 +132,7 @@ export default function SearchBankList(props) {
       } else
       {
         setrefreshBool(true);
-      dispatch(GetSearchCategories(initPager,props.props));
+      dispatch(GetSearchPostsAction(category,initPager,props.props));
       }
      }
 
@@ -169,24 +167,31 @@ export default function SearchBankList(props) {
        );
      }
  
-  
+     const loadBankFullPosts = (id,title,post)=>
+     {
+     //   console.log("clicked me");
+       navigation.navigate("FullPost",{
+         title:title,
+         id:id,
+        post:post
+       });
+     }
+ 
 
   const renderItem = (item ,index) =>
   {
-    
-      return(
-        <List>
-        <ListItem onPress={e=>loadRelatedBanks(item.id,item.name)}>
-          <Left>
-            <NativeBaseText style={{fontWeight:"bold"}}>{item.name} </NativeBaseText>
-          </Left>
-          <Right>
-            <Icon name="arrow-forward" />
-          </Right>
-        </ListItem>
-      </List>
-      );
-     
+    return(
+      <List >
+      <ListItem onPress={e=>loadBankFullPosts(item.slug,item.title.rendered,item.content.rendered)}>
+        <Left>
+          <NativeBaseText style={{fontWeight:"bold"}}>{item.title.rendered} </NativeBaseText>
+        </Left>
+        <Right>
+          <Icon name="arrow-forward" />
+        </Right>
+      </ListItem>
+    </List>
+  );
   }
 
   const renderFooter = () =>

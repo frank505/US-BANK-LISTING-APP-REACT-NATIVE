@@ -34,7 +34,7 @@ import HttpService from './HttpService'
 export const loadSearchPost = async (category,page,searchParam) =>
 {
     const http = new HttpService();
-    let url = "categories="+category+"&per_page=20&page="+page+"&search="+searchParam;
+    let Url = "posts?categories="+category+"&per_page=20&page="+page+"&search="+searchParam;
     return http.getData(Url).then((data)=>{
         console.log(Url);
        return data;

@@ -77,7 +77,7 @@ export const clearPostState = () =>
     }
 }
 
-
+   
 export const GetSearchPostsAction = (category,page,searchParam) =>
 {
 
@@ -108,7 +108,7 @@ export const GetSearchPostsAction = (category,page,searchParam) =>
 } 
 
 
-export const clearSearchCategoryState = () =>
+export const clearSearchPostState= () =>
 {
     return (dispatch)=>
     {

@@ -21,8 +21,10 @@ export default function Header() {
 
      const moveToSearchPostPage = () =>
      {
-       
-     }
+       navigation.navigate("BankListSearch",{
+         category:id
+       });
+     }   
     
     return (
         <BankListsHeader>

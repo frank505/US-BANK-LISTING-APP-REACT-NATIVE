@@ -3,7 +3,7 @@ import { Container, Header as FullPostHeader, Left, Body, Right, Button, Icon, T
 // import {styles} from '../styles'
 import {useNavigation,useRoute} from '@react-navigation/native';
 import { Platform } from 'react-native';
- 
+    
 export default function Header() {
 
     const navigation = useNavigation();

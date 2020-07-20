@@ -13,6 +13,7 @@ import BankLists from './pages/BankLists';
 import {useSelector} from 'react-redux';
 import FullPost from './pages/FullPost';
 import StateSearch from './pages/StateSearch';
+import BankListSearch from './pages/BankListSearch'
 
 
 
@@ -30,6 +31,7 @@ const Stack = createStackNavigator();
      <Stack.Screen name="BankLists" component={BankLists} />
      <Stack.Screen name="FullPost" component={FullPost} />
      <Stack.Screen name="StateSearch" component={StateSearch} />
+     <Stack.Screen name="BankListSearch" component={BankListSearch} />
   </Stack.Navigator>
    );
  }
