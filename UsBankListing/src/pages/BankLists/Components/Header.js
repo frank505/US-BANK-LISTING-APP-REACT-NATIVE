@@ -18,6 +18,11 @@ export default function Header() {
      {
         navigation.goBack();
      }
+
+     const moveToSearchPostPage = () =>
+     {
+       
+     }
     
     return (
         <BankListsHeader>
@@ -36,7 +41,7 @@ export default function Header() {
           <Title>{name}</Title>
           </Body>
           <Right>
-            
+          <Icon name="ios-search" onPress={moveToSearchPostPage} style={{marginRight:10,fontSize:20}} />
           </Right>
           
         </BankListsHeader>

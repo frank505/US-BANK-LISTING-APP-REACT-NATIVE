@@ -1,10 +1,10 @@
 import { CLEAR_POSTS, POSTS_LOADING, POSTS_SUCCESS, POSTS_ERROR,
-    CLEAR_POST, POST_LOADING, POST_SUCCESS, POST_ERROR 
+    CLEAR_SEARCH_POSTS, POSTS_SEARCH_LOADING, POSTS_SEARCH_SUCCESS, POSTS_SEARCH_ERROR 
 } from "../actiontypes/Posts"
 
 const initState = {
     postsState:"",
-    postState:""
+    postSearch:""
 }
 
  
@@ -36,28 +36,29 @@ const PostsReducer = (state=initState, action) =>
            postsState: action.res
             }
 
-            case CLEAR_POST:
+            case CLEAR_SEARCH_POSTS:
                 return{
                     ...state,
-                    postState:""
+                    postSearch:""
                 }
-                case POST_LOADING:
+                case POSTS_SEARCH_LOADING:
                     return{
                         ...state,
-                        postState:"loading"
+                        postSearch:"loading"
                     }
-            case POST_SUCCESS:
+            case POSTS_SEARCH_SUCCESS:
                 return{
                 ...state,
-                postState:action.res,
+                postSearch:action.res,
             }
     
-            case POST_ERROR:
+            case POSTS_SEARCH_ERROR:
                 return {
                ...state,
-               postState: action.res
+               postSearch: action.res
                 }
-
+     
+          
             
         default:
             return state

@@ -28,3 +28,18 @@ import HttpService from './HttpService'
     return error; 
      });
  }
+
+ //posts?categories=1&per_page=20&page=1&search=including 
+
+export const loadSearchPost = async (category,page,searchParam) =>
+{
+    const http = new HttpService();
+    let url = "categories="+category+"&per_page=20&page="+page+"&search="+searchParam;
+    return http.getData(Url).then((data)=>{
+        console.log(Url);
+       return data;
+   }).catch((error)=> {
+       return error; 
+        });
+
+}
