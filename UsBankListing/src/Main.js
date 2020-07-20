@@ -12,6 +12,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import BankLists from './pages/BankLists';
 import {useSelector} from 'react-redux';
 import FullPost from './pages/FullPost';
+import StateSearch from './pages/StateSearch';
 
 
 
@@ -28,8 +29,7 @@ const Stack = createStackNavigator();
       <Stack.Screen name="State" component={States} />
      <Stack.Screen name="BankLists" component={BankLists} />
      <Stack.Screen name="FullPost" component={FullPost} />
-   
-   
+     <Stack.Screen name="StateSearch" component={StateSearch} />
   </Stack.Navigator>
    );
  }

@@ -1,5 +1,7 @@
+
 import React from 'react'
-import { Container, Header as StateHeader, Item, Input, Icon, Button, Text } from 'native-base';
+import { Container, Header as StateHeader, Item, Input, 
+  Icon,Left,Right, Button,Body,Title, Text } from 'native-base';
 import {styles} from '../styles'
 import {useNavigation} from '@react-navigation/native';
 import { Platform } from 'react-native';
@@ -11,31 +13,36 @@ export default function Header() {
      const showDrawerNav = () =>
      {
         navigation.openDrawer();
-     }
-  
+    }
+     
+    const moveToSearchPage = () =>
+    {
+      navigation.navigate("StateSearch");
+    }
+
+
     return (
-        <StateHeader searchBar rounded>
+        <StateHeader>
+
+            <Left>
             {
-               Platform.OS=="ios"?
-               <Icon name="menu" onPress={showDrawerNav} style={styles.burgerStyle}/>
-               :
-               <></>
+              Platform.OS=='android'?
+              <Icon name="menu" onPress={showDrawerNav} style={{marginLeft:10,color:'white'}}/>
+              :
+              <Icon name="menu" onPress={showDrawerNav} style={{marginLeft:10}}/>
             }
-           
-  
-          <Item>
-              {
-                  Platform.OS=="android"?
-                  <Icon name="menu"  onPress={showDrawerNav} />
-                  :
-                  <></>
-              }
           
-            <Input placeholder="Search For Your State" />
-            <Icon name="ios-search" />
-            
-          </Item>
+         
+          </Left>
+          <Body>
+            <Title>Us States</Title>
+          </Body>
+          <Right>
+             <Icon name="ios-search" onPress={moveToSearchPage} style={{marginRight:10,fontSize:20}} />
+
+          </Right>    
           
         </StateHeader>
     )
 }
+

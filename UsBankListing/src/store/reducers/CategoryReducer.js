@@ -1,8 +1,11 @@
 import { CLEAR_CATEGORIES, CATEGORIES_LOADING, 
-    CATEGORIES_SUCCESS, CATEGORIES_ERROR } from "../actiontypes/Categories"
+    CATEGORIES_SUCCESS, CATEGORIES_ERROR, CLEAR_SEARCH_CATEGORIES, 
+    CATEGORIES_SEARCH_LOADING, CATEGORIES_SEARCH_SUCCESS, 
+    CATEGORIES_SEARCH_ERROR } from "../actiontypes/Categories"
 
 const initState = {
     categorieState:"",
+    categoriesSearchState:""
 }
 
 
@@ -32,7 +35,28 @@ const CategoryReducer = (state=initState, action) =>
            ...state,
            categorieState: action.res
             }
+         
+            case CLEAR_SEARCH_CATEGORIES:
+            return{
+                ...state,
+                categoriesSearchState:""
+            }
+            case CATEGORIES_SEARCH_LOADING:
+                return{
+                    ...state,
+                    categoriesSearchState:"loading"
+                }
+        case CATEGORIES_SEARCH_SUCCESS:
+            return{
+            ...state,
+            categoriesSearchState:action.res,
+        }
 
+        case CATEGORIES_SEARCH_ERROR:
+            return {
+           ...state,
+           categoriesSearchState: action.res
+            }
             
         default:
             return state

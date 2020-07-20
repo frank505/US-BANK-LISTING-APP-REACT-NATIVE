@@ -1,6 +1,7 @@
 import React from 'react'
 import { Header, Item, Input, Icon } from 'native-base';
 import {useNavigation} from '@react-navigation/native';
+import { GetSearchCategories } from '../../../store/actions/CategoryAction';
 
 export default function SearchBar(props) {
 
@@ -8,7 +9,9 @@ export default function SearchBar(props) {
    
     const SearchData=(text)=>
     {
-     props.parentCallBack(text);
+      
+        props.parentCallBack(text);
+  
     }
 
     const goBack = () =>

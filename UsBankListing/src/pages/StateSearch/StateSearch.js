@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { Container ,Root } from 'native-base';
 import SearchBar from './components/SearchBar';
-import ItemList from './components/ItemList';
+import SearchStateList from './components/SearchStateList';
 
 
 
@@ -20,7 +20,7 @@ export default function StateSearch() {
       <Container>
        <SearchBar parentCallBack={getSearchData}/>
        
-   <ItemList props={searchValue}/>
+   <SearchStateList props={searchValue}/>
       
        
 

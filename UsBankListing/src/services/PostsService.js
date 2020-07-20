@@ -20,10 +20,7 @@ import HttpService from './HttpService'
  export  const loadPost = async (id) =>
  {  
     const http = new HttpService();
-
-
   let  Url = "posts?slug="+id;
-
   return http.getData(Url).then((data)=>{
      console.log(Url);
     return data;

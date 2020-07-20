@@ -22,8 +22,12 @@ import HttpService from './HttpService'
   const http = new HttpService();
   let  Url = "categories?search="+searchParam+"&per_page=20&page="+page;
   return http.getData(Url).then((data)=>{
+    console.log(Url);
     return data;
 }).catch((error)=> {
     return error; 
      });
  }
+
+ 
+
